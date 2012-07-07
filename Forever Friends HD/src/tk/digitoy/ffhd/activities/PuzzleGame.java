@@ -63,8 +63,7 @@ public class PuzzleGame extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
@@ -121,11 +120,11 @@ public class PuzzleGame extends Activity {
 			point.x = 0;
 			point.y = 0;
 			Point point1 = new Point();
-			point1.x = width / 4;
-			point1.y = height / 5;
+			point1.x = width * 251 / 800; // Whole picture
+			point1.y = height * 97 / 480; // coordinates
 			Point point2 = new Point();
-			point2.x = width / 15;
-			point2.y = height / 4;
+			point2.x = width / 15; // what is this?
+			point2.y = height / 4; // O.o
 
 			countOfUndragebleImages = 0;
 

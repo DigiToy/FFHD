@@ -3,7 +3,7 @@
     android:id="@+id/memory_game_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/memory_game_bg" >
+    android:background="@drawable/wallpapers_bg" >
 
     <ImageView
         android:id="@+id/buttonSound"
