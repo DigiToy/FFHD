@@ -17,11 +17,9 @@ public class AppSettings {
 
 	// Flags
 	public static boolean soundIsOn;
-	public static boolean eyeIsOpen;
-	public static boolean windowIsOpen;
 
 	// Kitty song
-	public static MediaPlayer kittySong;
+	public static MediaPlayer music;
 
 	/**
 	 * Checks if the application is being sent in the background (i.e behind

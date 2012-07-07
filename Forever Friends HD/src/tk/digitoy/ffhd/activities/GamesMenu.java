@@ -60,9 +60,9 @@ public class GamesMenu extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.kittySong = MediaPlayer.create(getBaseContext(),
+		AppSettings.music = MediaPlayer.create(getBaseContext(),
 				R.raw.music);
-		AppSettings.kittySong.setLooping(true);
+		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
 
@@ -89,11 +89,11 @@ public class GamesMenu extends Activity {
 			public void onClick(View v) {
 				if (AppSettings.soundIsOn) {
 					buttonSound.setImageResource(R.drawable.sound_icon_off);
-					AppSettings.kittySong.pause();
+					AppSettings.music.pause();
 					AppSettings.soundIsOn = !AppSettings.soundIsOn;
 				} else {
 					buttonSound.setImageResource(R.drawable.sound_icon_on);
-					AppSettings.kittySong.start();
+					AppSettings.music.start();
 					AppSettings.soundIsOn = !AppSettings.soundIsOn;
 				}
 			}
@@ -183,7 +183,7 @@ public class GamesMenu extends Activity {
 	// Start playing sound if sound is on
 	private void sing() {
 		if (AppSettings.soundIsOn) {
-			AppSettings.kittySong.start();
+			AppSettings.music.start();
 		}
 	}
 
@@ -215,7 +215,7 @@ public class GamesMenu extends Activity {
 	protected void onPause() {
 		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
-			AppSettings.kittySong.pause();
+			AppSettings.music.pause();
 		}
 	}
 	

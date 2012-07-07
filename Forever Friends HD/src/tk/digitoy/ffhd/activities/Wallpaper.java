@@ -71,9 +71,9 @@ public class Wallpaper extends Activity implements Runnable {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.kittySong = MediaPlayer.create(getBaseContext(),
+		AppSettings.music = MediaPlayer.create(getBaseContext(),
 				R.raw.music);
-		AppSettings.kittySong.setLooping(true);
+		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
 
@@ -110,7 +110,7 @@ public class Wallpaper extends Activity implements Runnable {
 	// Start playing sound if sound is on
 	private void sing() {
 		if (AppSettings.soundIsOn) {
-			AppSettings.kittySong.start();
+			AppSettings.music.start();
 		}
 	}
 
@@ -118,7 +118,7 @@ public class Wallpaper extends Activity implements Runnable {
 	protected void onPause() {
 		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
-			AppSettings.kittySong.pause();
+			AppSettings.music.pause();
 		}
 		if (pDialog != null && pDialog.isShowing()) {
 			pDialog.dismiss();
