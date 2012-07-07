@@ -36,13 +36,22 @@ public class MainMenu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_menu);
-		if (!AppSettings.isInit) {
-			initAll();
-		}
+
+		initAll();
 
 		initLayoutParams();
 		drawStaticLayout();
-		// checkIfPhoneIsSilent();
+	}
+
+	// Called when the activity returning to foreground.
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		drawDynamicLayout();
+		setParams();
+		setListeners();
+		sing();
 	}
 
 	// Initializing display metrics
@@ -55,17 +64,6 @@ public class MainMenu extends Activity {
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 		AppSettings.soundIsOn = true;
-	}
-
-	// Called when the activity returning to foreground.
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		drawDynamicLayout();
-		setParams();
-		setListeners();
-		sing();
 	}
 
 	// Setting images and buttons parameters

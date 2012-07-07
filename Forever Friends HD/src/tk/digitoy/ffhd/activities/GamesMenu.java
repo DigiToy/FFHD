@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,10 +30,6 @@ public class GamesMenu extends Activity {
 	private LayoutParams paramMemory;
 	private LayoutParams paramPuzzle;
 
-	// Buttons unselected
-	private LayoutParams paramMemorySelect;
-	private LayoutParams paramPuzzleSelect;
-
 	// Activity Layout
 	private RelativeLayout rl;
 
@@ -50,7 +45,7 @@ public class GamesMenu extends Activity {
 
 		initLayoutParams();
 		drawStaticLayout();
-		
+
 		AdMobAdsRequest();
 	}
 
@@ -60,8 +55,7 @@ public class GamesMenu extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
@@ -102,16 +96,14 @@ public class GamesMenu extends Activity {
 		// "Memory Game" button Click Listener
 		buttonMemory.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				animateAndGo(buttonMemory, paramMemory, paramMemorySelect,
-						new Intent(arg0.getContext(), MemoryHelp.class));
+				startActivity(new Intent(arg0.getContext(), MemoryHelp.class));
 			}
 		});
 
 		// "Puzzle Game" button Click Listener
 		buttonPuzzle.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				animateAndGo(buttonPuzzle, paramPuzzle, paramPuzzleSelect,
-						new Intent(arg0.getContext(), PuzzleGame.class));
+				startActivity(new Intent(arg0.getContext(), PuzzleGame.class));
 			}
 		});
 	}
@@ -119,26 +111,15 @@ public class GamesMenu extends Activity {
 	// Initializing Layout Parameters
 	private void initLayoutParams() {
 		// Buttons unselected Parameters
-		paramMemory = new LayoutParams(AppSettings.dispWidth * 354 / 800,
-				AppSettings.dispHeight * 83 / 480);
-		paramMemory.leftMargin = AppSettings.dispWidth * 137 / 800;
-		paramMemory.topMargin = AppSettings.dispHeight * 139 / 480;
+		paramMemory = new LayoutParams(AppSettings.dispWidth * 265 / 800,
+				AppSettings.dispHeight * 108 / 480);
+		paramMemory.leftMargin = AppSettings.dispWidth * 56 / 800;
+		paramMemory.topMargin = AppSettings.dispHeight * 88 / 480;
 
-		paramPuzzle = new LayoutParams(AppSettings.dispWidth * 370 / 800,
-				AppSettings.dispHeight * 86 / 480);
-		paramPuzzle.leftMargin = AppSettings.dispWidth * 128 / 800;
-		paramPuzzle.topMargin = AppSettings.dispHeight * 224 / 480;
-
-		// Buttons selected Parameters
-		paramMemorySelect = new LayoutParams(AppSettings.dispWidth * 360 / 800,
-				AppSettings.dispHeight * 88 / 480);
-		paramMemorySelect.leftMargin = AppSettings.dispWidth * 134 / 800;
-		paramMemorySelect.topMargin = AppSettings.dispHeight * 137 / 480;
-
-		paramPuzzleSelect = new LayoutParams(AppSettings.dispWidth * 376 / 800,
-				AppSettings.dispHeight * 91 / 480);
-		paramPuzzleSelect.leftMargin = AppSettings.dispWidth * 125 / 800;
-		paramPuzzleSelect.topMargin = AppSettings.dispHeight * 222 / 480;
+		paramPuzzle = new LayoutParams(AppSettings.dispWidth * 266 / 800,
+				AppSettings.dispHeight * 108 / 480);
+		paramPuzzle.leftMargin = AppSettings.dispWidth * 55 / 800;
+		paramPuzzle.topMargin = AppSettings.dispHeight * 214 / 480;
 
 	}
 
@@ -187,30 +168,6 @@ public class GamesMenu extends Activity {
 		}
 	}
 
-	// Animate Button on click
-	private void animateAndGo(final ImageView iv, final LayoutParams first,
-			final LayoutParams second, final Intent go) {
-		new CountDownTimer(500, 100) {
-
-			boolean b = true;
-
-			@Override
-			public void onTick(long millisUntilFinished) {
-				if (b) {
-					iv.setLayoutParams(second);
-				} else {
-					iv.setLayoutParams(first);
-				}
-				b = !b;
-			}
-
-			@Override
-			public void onFinish() {
-				GamesMenu.this.startActivity(go);
-			}
-		}.start();
-	}
-
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -218,7 +175,7 @@ public class GamesMenu extends Activity {
 			AppSettings.music.pause();
 		}
 	}
-	
+
 	private AdView adView;
 	private String MY_AD_UNIT_ID;
 
