@@ -39,15 +39,14 @@ public class MemoryGame extends Activity implements OnClickListener {
 	public static int appgridY = 3;
 	public static int folderName = 0;
 
-	public static int top = AppSettings.dispHeight * 115 / 480;
-	public static int left = AppSettings.dispWidth * 235 / 800;
+	public static int top = AppSettings.dispHeight * 90 / 480;
+	public static int left = AppSettings.dispWidth * 190 / 800;
 
 	// Images
-	private int[] images = new int[] { R.drawable.mg_01, R.drawable.mg_02,
-			R.drawable.mg_03, R.drawable.mg_04, R.drawable.mg_05,
-			R.drawable.mg_06, R.drawable.mg_07, R.drawable.mg_08,
-			R.drawable.mg_09, R.drawable.mg_10, R.drawable.mg_11,
-			R.drawable.mg_12 };
+	private int[] images = new int[] { R.drawable.m_01, R.drawable.m_02,
+			R.drawable.m_03, R.drawable.m_04, R.drawable.m_05, R.drawable.m_06,
+			R.drawable.m_07, R.drawable.m_08, R.drawable.m_09, R.drawable.m_10,
+			R.drawable.m_11, R.drawable.m_12 };
 
 	RelativeLayout rel;
 	RelativeLayout.LayoutParams[] lps;
@@ -71,10 +70,10 @@ public class MemoryGame extends Activity implements OnClickListener {
 	Random r = new Random();
 	Handler myHandler = new Handler();
 
-	private int imgSizeW = AppSettings.dispWidth * 80 / 800;
-	private int imgDistW = AppSettings.dispWidth * 6 / 800;
-	private int imgSizeH = AppSettings.dispHeight * 80 / 480;
-	private int imgDistH = AppSettings.dispHeight * 6 / 480;
+	private int imgSizeW = AppSettings.dispWidth * 98 / 800;
+	private int imgDistW = AppSettings.dispWidth * 12 / 800;
+	private int imgSizeH = AppSettings.dispHeight * 95 / 480;
+	private int imgDistH = AppSettings.dispHeight * 14 / 480;
 	final static int INTERVAL = 1000;
 
 	/** Called when the activity is first created. */
@@ -115,8 +114,7 @@ public class MemoryGame extends Activity implements OnClickListener {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
@@ -268,7 +266,7 @@ public class MemoryGame extends Activity implements OnClickListener {
 			image[i].img = new ImageView(getBaseContext());
 			image[i].imgdef = new ImageView(getBaseContext());
 
-			image[i].imgdef.setBackgroundResource(R.drawable.mg_cover);
+			image[i].imgdef.setBackgroundResource(R.drawable.m_cover);
 			image[i].img.setVisibility(View.INVISIBLE);
 
 			image[i].img.setLayoutParams(lps[index[i]]);
