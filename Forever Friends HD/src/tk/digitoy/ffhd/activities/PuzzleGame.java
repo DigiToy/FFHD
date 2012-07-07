@@ -653,12 +653,10 @@ public class PuzzleGame extends Activity {
 	}
 
 	private AdView adView;
-	private String MY_AD_UNIT_ID;
 
 	public void AdMobAdsRequest() {
-		MY_AD_UNIT_ID = "a14fc5f9d5f1926";
 
-		adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
+		adView = new AdView(this, AdSize.BANNER, AppSettings.MY_AD_UNIT_ID);
 
 		// Lookup your LinearLayout assuming it’s been given
 		// the attribute android:id="@+id/mainLayout"

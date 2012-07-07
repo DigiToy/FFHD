@@ -351,12 +351,10 @@ public class MemoryGame extends Activity implements OnClickListener {
 	}
 
 	private AdView adView;
-	private String MY_AD_UNIT_ID;
 
 	public void AdMobAdsRequest() {
-		MY_AD_UNIT_ID = "a14fccb9c7a0b1c";
-
-		adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
+		
+		adView = new AdView(this, AdSize.BANNER, AppSettings.MY_AD_UNIT_ID);
 
 		// Lookup your LinearLayout assuming it’s been given
 		// the attribute android:id="@+id/mainLayout"

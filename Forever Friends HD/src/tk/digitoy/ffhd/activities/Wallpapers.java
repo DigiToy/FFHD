@@ -1,5 +1,9 @@
 package tk.digitoy.ffhd.activities;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import tk.digitoy.ffhd.utils.AppSettings;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -22,6 +27,7 @@ public class Wallpapers extends Activity implements OnClickListener {
 	// Layouts
 	private LayoutParams paramWallScroll;
 	private LinearLayout.LayoutParams paramWall;
+	RelativeLayout layout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class Wallpapers extends Activity implements OnClickListener {
 		}
 
 		drawStaticLayout();
+		AdMobAdsRequest();
 	}
 
 	// Initializing display metrics
@@ -145,5 +152,27 @@ public class Wallpapers extends Activity implements OnClickListener {
 		Intent go = new Intent(this, Wallpaper.class);
 		go.putExtra("wallNumber", v.getId());
 		startActivity(go);
+	}
+	
+	private AdView adView;
+
+	public void AdMobAdsRequest() {
+		
+		adView = new AdView(this, AdSize.BANNER, AppSettings.MY_AD_UNIT_ID);
+
+		// Lookup your LinearLayout assuming it’s been given
+		// the attribute android:id="@+id/mainLayout"
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.walpapers_rl);
+		RelativeLayout.LayoutParams adMobLayoutParams = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		adMobLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		adMobLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		adView.setLayoutParams(adMobLayoutParams);
+
+		// Add the adView to it
+		layout.addView(adView);
+
+		// Initiate a generic request to load it with an ad
+		adView.loadAd(new AdRequest());
 	}
 }

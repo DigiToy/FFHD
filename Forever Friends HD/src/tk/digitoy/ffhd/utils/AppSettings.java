@@ -20,6 +20,9 @@ public class AppSettings {
 
 	// Kitty song
 	public static MediaPlayer music;
+	
+	//AdMob ID
+	public static String MY_AD_UNIT_ID = "a14ff8400c1ddb6";
 
 	/**
 	 * Checks if the application is being sent in the background (i.e behind

@@ -2,10 +2,6 @@ package tk.digitoy.ffhd.activities;
 
 import tk.digitoy.ffhd.utils.AppSettings;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -46,7 +42,6 @@ public class GamesMenu extends Activity {
 		initLayoutParams();
 		drawStaticLayout();
 
-		AdMobAdsRequest();
 	}
 
 	// Initializing display metrics
@@ -175,28 +170,4 @@ public class GamesMenu extends Activity {
 			AppSettings.music.pause();
 		}
 	}
-
-	private AdView adView;
-	private String MY_AD_UNIT_ID;
-
-	public void AdMobAdsRequest() {
-		MY_AD_UNIT_ID = "a14fccb9c7a0b1c";
-
-		adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
-
-		// Lookup your LinearLayout assuming it’s been given
-		// the attribute android:id="@+id/mainLayout"
-		RelativeLayout layout = (RelativeLayout) findViewById(R.id.games_menu);
-		RelativeLayout.LayoutParams adMobLayoutParams = new RelativeLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		adMobLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		adView.setLayoutParams(adMobLayoutParams);
-
-		// Add the adView to it
-		layout.addView(adView);
-
-		// Initiate a generic request to load it with an ad
-		adView.loadAd(new AdRequest());
-	}
-
 }
