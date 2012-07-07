@@ -188,7 +188,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/wallpaper_thumb"
-                android:src="@drawable/wall_13" />
+                android:src="@drawable/wall_15" />
 
             <ImageView
                 android:id="@+id/imageView16"
@@ -199,7 +199,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/wallpaper_thumb"
-                android:src="@drawable/wall_14" />
+                android:src="@drawable/wall_16" />
         </LinearLayout>
     </HorizontalScrollView>
 
