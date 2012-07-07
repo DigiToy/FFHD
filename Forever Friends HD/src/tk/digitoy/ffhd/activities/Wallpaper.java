@@ -60,8 +60,8 @@ public class Wallpaper extends Activity implements Runnable {
 			wSize = "1920x1408";
 		}
 
-		imagePath = wSize + "/w_" + (wallNumber < 10 ? "0" : "") + wallNumber
-				+ ".jpg";
+		imagePath = wSize + "/w_" + (wallNumber < 10 ? "0" : "")
+				+ (wallNumber + 1) + ".jpg";
 		drawStaticLayout();
 	}
 
@@ -71,8 +71,7 @@ public class Wallpaper extends Activity implements Runnable {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
