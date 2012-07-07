@@ -29,7 +29,7 @@ public class ImagesRealization {
 		wholeW = partW * 4;
 		wholeH = partH * 3;
 
-		backFrameColorRect = new ImageRect(context, R.drawable.image_main,
+		backFrameColorRect = new ImageRect(context, R.drawable.transparent,
 				point2, wholeW, wholeH);
 
 		switch (whichImage) {

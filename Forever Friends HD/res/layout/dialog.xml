@@ -3,9 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@drawable/transparent"
     android:gravity="center"
-    android:orientation="vertical" 
-    android:background="@drawable/win_bg">
+    android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/imageView1"
