@@ -60,7 +60,7 @@ public class Wallpaper extends Activity implements Runnable {
 			wSize = "1920x1408";
 		}
 
-		imagePath = wSize + "/w_" + (wallNumber < 10 ? "0" : "")
+		imagePath = wSize + "/w_" + (wallNumber < 9 ? "0" : "")
 				+ (wallNumber + 1) + ".jpg";
 		drawStaticLayout();
 	}
