@@ -1,15 +1,25 @@
 package tk.digitoy.ffhd.activities;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import tk.digitoy.ffhd.utils.AppSettings;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
+import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -21,12 +31,17 @@ public class Wallpaper extends Activity implements Runnable {
 	private ProgressDialog pDialog;
 	// Button Images
 	private ImageView buttonSet;
+	private ImageView buttonSave;
 
 	// generate bitmap
 	private int resID;
 	private String imagePath;
 
 	private int[] walls;
+
+	int wallNumber;
+
+	int saveOrSet;
 
 	// decide wall size
 	private String wSize;
@@ -47,7 +62,7 @@ public class Wallpaper extends Activity implements Runnable {
 				R.drawable.wt_12, R.drawable.wt_13, R.drawable.wt_14,
 				R.drawable.wt_15, R.drawable.wt_16 };
 
-		int wallNumber = getIntent().getIntExtra("wallNumber", 1000);
+		wallNumber = getIntent().getIntExtra("wallNumber", 1000);
 		resID = walls[wallNumber];
 
 		if (AppSettings.dispHeight == 480) {
@@ -87,10 +102,17 @@ public class Wallpaper extends Activity implements Runnable {
 
 	// Activating click listeners
 	private void setListeners() {
-		// Sound button Click Listener
+		// Set Wallpaper
 		buttonSet.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				SetWallpaper();
+				setWallpaper();
+			}
+		});
+
+		// Set Wallpaper
+		buttonSave.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				saveWallpaper();
 			}
 		});
 
@@ -101,6 +123,7 @@ public class Wallpaper extends Activity implements Runnable {
 
 		// Handling from XML
 		buttonSet = (ImageView) findViewById(R.id.buttonSetWall);
+		buttonSave = (ImageView) findViewById(R.id.buttonSaveWall);
 
 		ImageView img = (ImageView) findViewById(R.id.wallPaper);
 		img.setImageResource(resID);
@@ -124,7 +147,18 @@ public class Wallpaper extends Activity implements Runnable {
 		}
 	}
 
-	public void SetWallpaper() {
+	public void setWallpaper() {
+		saveOrSet = 0;
+		pDialog = ProgressDialog.show(this, "", "", true, false);
+		pDialog.setContentView(R.layout.wait_dialog);
+		TextView wait = (TextView) pDialog.findViewById(R.id.wait);
+		wait.setText(R.string.please_wait);
+		Thread thread = new Thread(this);
+		thread.start();
+	}
+
+	private void saveWallpaper() {
+		saveOrSet = 1;
 		pDialog = ProgressDialog.show(this, "", "", true, false);
 		pDialog.setContentView(R.layout.wait_dialog);
 		TextView wait = (TextView) pDialog.findViewById(R.id.wait);
@@ -134,21 +168,79 @@ public class Wallpaper extends Activity implements Runnable {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
-		WallpaperManager wm = WallpaperManager.getInstance(Wallpaper.this);
-		try {
-			wm.setBitmap(BitmapFactory
-					.decodeStream(getAssets().open(imagePath)));
-			this.runOnUiThread(new Runnable() {
-				public void run() {
-					Toast.makeText(Wallpaper.this, "Wallpaper changed",
-							Toast.LENGTH_SHORT).show();
+		if (saveOrSet == 1) {
+			String newFileName = Environment.getExternalStorageDirectory()
+					+ "/Forever_Friends/FF_wallpaper_" + (wallNumber + 1)
+					+ ".jpg";
+
+			if (new File(newFileName).exists()) {
+				pDialog.dismiss();
+				Toast.makeText(
+						Wallpaper.this,
+						getResources().getString(
+								R.string.wallpaper_alreadysaved),
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+
+			AssetManager assetManager = this.getAssets();
+
+			InputStream in = null;
+			OutputStream out = null;
+			try {
+				new File(Environment.getExternalStorageDirectory()
+						+ "/Forever_Friends/").mkdirs();
+
+				in = assetManager.open(imagePath);
+
+				out = new FileOutputStream(newFileName);
+
+				byte[] buffer = new byte[1024];
+				int read;
+				while ((read = in.read(buffer)) != -1) {
+					out.write(buffer, 0, read);
 				}
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			pDialog.dismiss();
+				in.close();
+				in = null;
+				out.flush();
+				out.close();
+				out = null;
+				sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+						Uri.parse("file://"
+								+ Environment.getExternalStorageDirectory())));
+				this.runOnUiThread(new Runnable() {
+					public void run() {
+						Toast.makeText(
+								Wallpaper.this,
+								getResources().getString(
+										R.string.wallpaper_saved),
+								Toast.LENGTH_LONG).show();
+					}
+				});
+			} catch (Exception e) {
+				Log.e("tag", e.getMessage());
+			} finally {
+				pDialog.dismiss();
+			}
+		} else {
+			WallpaperManager wm = WallpaperManager.getInstance(Wallpaper.this);
+			try {
+				wm.setBitmap(BitmapFactory.decodeStream(getAssets().open(
+						imagePath)));
+				this.runOnUiThread(new Runnable() {
+					public void run() {
+						Toast.makeText(
+								Wallpaper.this,
+								getResources().getString(
+										R.string.wallpaper_changed),
+								Toast.LENGTH_LONG).show();
+					}
+				});
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				pDialog.dismiss();
+			}
 		}
 	}
 }

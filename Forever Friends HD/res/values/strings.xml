@@ -6,4 +6,7 @@
     <string name="win_text">Congratulations, you win</string>
     <string name="please_wait">Please Wait</string>
     <string name="wallpaper_thumb">Wallpaper Thumbnail</string>
+    <string name="wallpaper_saved">Wallpaper Saved</string>
+    <string name="wallpaper_changed">Wallpaper Changed</string>
+    <string name="wallpaper_alreadysaved">Wallpaper already has been saved</string>
 </resources>
