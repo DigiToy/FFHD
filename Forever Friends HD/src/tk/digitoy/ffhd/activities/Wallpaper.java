@@ -173,16 +173,6 @@ public class Wallpaper extends Activity implements Runnable {
 					+ "/Forever_Friends/FF_wallpaper_" + (wallNumber + 1)
 					+ ".jpg";
 
-			if (new File(newFileName).exists()) {
-				pDialog.dismiss();
-				Toast.makeText(
-						Wallpaper.this,
-						getResources().getString(
-								R.string.wallpaper_alreadysaved),
-						Toast.LENGTH_LONG).show();
-				return;
-			}
-
 			AssetManager assetManager = this.getAssets();
 
 			InputStream in = null;
