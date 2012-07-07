@@ -28,10 +28,6 @@ public class MainMenu extends Activity {
 	private LayoutParams paramWall;
 	private LayoutParams paramAbout;
 
-	// Images
-	private LayoutParams paramKitty;
-	private LayoutParams paramWindow;
-
 	// Activity Layout
 	private RelativeLayout rl;
 
@@ -55,8 +51,7 @@ public class MainMenu extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 		AppSettings.soundIsOn = true;
@@ -123,31 +118,20 @@ public class MainMenu extends Activity {
 	// Initializing Layout Parameters
 	private void initLayoutParams() {
 		// Buttons unselected Parameters
-		paramGame = new LayoutParams(AppSettings.dispWidth * 265 / 800,
-				AppSettings.dispHeight * 44 / 480);
-		paramGame.leftMargin = AppSettings.dispWidth * 371 / 800;
-		paramGame.topMargin = AppSettings.dispHeight * 60 / 480;
+		paramGame = new LayoutParams(AppSettings.dispWidth * 236 / 800,
+				AppSettings.dispHeight * 76 / 480);
+		paramGame.leftMargin = AppSettings.dispWidth * 88 / 800;
+		paramGame.topMargin = AppSettings.dispHeight * 136 / 480;
 
-		paramWall = new LayoutParams(AppSettings.dispWidth * 265 / 800,
-				AppSettings.dispHeight * 43 / 480);
-		paramWall.leftMargin = AppSettings.dispWidth * 355 / 800;
-		paramWall.topMargin = AppSettings.dispHeight * 102 / 480;
+		paramWall = new LayoutParams(AppSettings.dispWidth * 236 / 800,
+				AppSettings.dispHeight * 76 / 480);
+		paramWall.leftMargin = AppSettings.dispWidth * 90 / 800;
+		paramWall.topMargin = AppSettings.dispHeight * 64 / 480;
 
-		paramAbout = new LayoutParams(AppSettings.dispWidth * 265 / 800,
-				AppSettings.dispHeight * 46 / 480);
-		paramAbout.leftMargin = AppSettings.dispWidth * 371 / 800;
-		paramAbout.topMargin = AppSettings.dispHeight * 143 / 480;
-
-		// Image Parameters
-		paramKitty = new LayoutParams(AppSettings.dispWidth * 245 / 800,
-				AppSettings.dispHeight * 230 / 480);
-		paramKitty.leftMargin = AppSettings.dispWidth * 375 / 800;
-		paramKitty.topMargin = AppSettings.dispHeight * 250 / 480;
-
-		paramWindow = new LayoutParams(AppSettings.dispWidth * 214 / 800,
-				AppSettings.dispHeight * 171 / 480);
-		paramWindow.leftMargin = AppSettings.dispWidth * 107 / 800;
-		paramWindow.topMargin = AppSettings.dispHeight * 236 / 480;
+		paramAbout = new LayoutParams(AppSettings.dispWidth * 236 / 800,
+				AppSettings.dispHeight * 76 / 480);
+		paramAbout.leftMargin = AppSettings.dispWidth * 86 / 800;
+		paramAbout.topMargin = AppSettings.dispHeight * 207 / 480;
 	}
 
 	// Creating and adding static views
