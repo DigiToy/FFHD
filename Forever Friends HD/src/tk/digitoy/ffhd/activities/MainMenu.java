@@ -107,7 +107,7 @@ public class MainMenu extends Activity {
 		// "About" button Click Listener
 		buttonAbout.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				startActivity(new Intent(arg0.getContext(), AboutKitty.class));
+				startActivity(new Intent(arg0.getContext(), About.class));
 			}
 		});
 

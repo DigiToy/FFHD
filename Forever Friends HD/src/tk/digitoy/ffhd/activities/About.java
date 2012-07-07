@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-public class AboutKitty extends Activity {
+public class About extends Activity {
 
 	// Button Images
 	private ImageView buttonSound;
