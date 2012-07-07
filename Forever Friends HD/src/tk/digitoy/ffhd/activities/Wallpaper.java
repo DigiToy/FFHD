@@ -24,12 +24,12 @@ public class Wallpaper extends Activity implements Runnable {
 
 	// generate bitmap
 	private int resID;
+	private String imagePath;
 
-	// generate layout
-	private int resTID;
+	private int[] walls;
 
-	int[] walls;
-	int[] wallts;
+	// decide wall size
+	private String wSize;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +40,7 @@ public class Wallpaper extends Activity implements Runnable {
 			initAll();
 		}
 
-		walls = new int[] { R.drawable.w_01, R.drawable.w_02, R.drawable.w_03,
-				R.drawable.w_04, R.drawable.w_05, R.drawable.w_06,
-				R.drawable.w_07, R.drawable.w_08, R.drawable.w_09,
-				R.drawable.w_10, R.drawable.w_11, R.drawable.w_12,
-				R.drawable.w_13, R.drawable.w_14, R.drawable.w_15,
-				R.drawable.w_16 };
-
-		wallts = new int[] { R.drawable.wt_01, R.drawable.wt_02,
+		walls = new int[] { R.drawable.wt_01, R.drawable.wt_02,
 				R.drawable.wt_03, R.drawable.wt_04, R.drawable.wt_05,
 				R.drawable.wt_06, R.drawable.wt_07, R.drawable.wt_08,
 				R.drawable.wt_09, R.drawable.wt_10, R.drawable.wt_11,
@@ -56,7 +49,19 @@ public class Wallpaper extends Activity implements Runnable {
 
 		int wallNumber = getIntent().getIntExtra("wallNumber", 1000);
 		resID = walls[wallNumber];
-		resTID = wallts[wallNumber];
+
+		if (AppSettings.dispHeight == 480) {
+			wSize = "960x800";
+		} else if (AppSettings.dispHeight == 600) {
+			wSize = "1200x1024";
+		} else if (AppSettings.dispHeight == 720) {
+			wSize = "1440x1280";
+		} else {
+			wSize = "1920x1408";
+		}
+
+		imagePath = wSize + "/w_" + (wallNumber < 10 ? "0" : "") + wallNumber
+				+ ".jpg";
 		drawStaticLayout();
 	}
 
@@ -99,7 +104,7 @@ public class Wallpaper extends Activity implements Runnable {
 		buttonSet = (ImageView) findViewById(R.id.buttonSetWall);
 
 		ImageView img = (ImageView) findViewById(R.id.wallPaper);
-		img.setImageResource(resTID);
+		img.setImageResource(resID);
 	}
 
 	// Start playing sound if sound is on
@@ -133,7 +138,8 @@ public class Wallpaper extends Activity implements Runnable {
 		// TODO Auto-generated method stub
 		WallpaperManager wm = WallpaperManager.getInstance(Wallpaper.this);
 		try {
-			wm.setBitmap(BitmapFactory.decodeResource(getResources(), resID));
+			wm.setBitmap(BitmapFactory
+					.decodeStream(getAssets().open(imagePath)));
 			this.runOnUiThread(new Runnable() {
 				public void run() {
 					Toast.makeText(Wallpaper.this, "Wallpaper changed",
