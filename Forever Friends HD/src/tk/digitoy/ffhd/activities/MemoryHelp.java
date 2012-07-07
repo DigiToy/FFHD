@@ -45,8 +45,7 @@ public class MemoryHelp extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
@@ -98,12 +97,11 @@ public class MemoryHelp extends Activity {
 	// Initializing Layout Parameters
 	private void initLayoutParams() {
 		// Buttons unselected Parameters
-		paramPlay = new LayoutParams(AppSettings.dispWidth * 380 / 800,
-				AppSettings.dispHeight * 70 / 480);
-		paramPlay.setMargins(AppSettings.dispWidth * 205 / 800,
-				AppSettings.dispHeight * 260 / 480,
-				AppSettings.dispWidth * 215 / 800,
-				AppSettings.dispHeight * 150 / 480);
+		paramPlay = new LayoutParams(AppSettings.dispWidth * 120 / 800,
+				AppSettings.dispHeight * 69 / 480);
+
+		paramPlay.leftMargin = AppSettings.dispWidth * 340 / 800;
+		paramPlay.topMargin = AppSettings.dispHeight * 293 / 480;
 	}
 
 	// Creating and adding views
