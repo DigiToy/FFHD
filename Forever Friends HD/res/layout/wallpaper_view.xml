@@ -5,19 +5,20 @@
 
     <ImageView
         android:id="@+id/wallPaper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/wallpaper_thumb" />
-    <ImageView
+
+    <ImageView
         android:id="@+id/buttonSaveWall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/button_sound_content"
-        android:src="@drawable/set_button" />
+        android:src="@drawable/save_button" />
 
     <ImageView
         android:id="@+id/buttonSetWall"

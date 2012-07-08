@@ -76,6 +76,8 @@ public class MemoryGame extends Activity implements OnClickListener {
 	private int imgDistH = AppSettings.dispHeight * 14 / 480;
 	final static int INTERVAL = 1000;
 
+	MediaPlayer sparkSound;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,8 @@ public class MemoryGame extends Activity implements OnClickListener {
 		createImages();
 
 		AdMobAdsRequest();
+
+		sparkSound = MediaPlayer.create(getBaseContext(), R.raw.sparks_music);
 
 	}
 
@@ -182,8 +186,7 @@ public class MemoryGame extends Activity implements OnClickListener {
 		} else if (q == 2 && sec == false) {
 
 			if (image[k].vis == true) {
-				MediaPlayer.create(getBaseContext(), R.raw.sparks_music)
-						.start();
+				sparkSound.start();
 				myHandler.removeCallbacks(image[k]);
 				animation = new AlphaAnimation(1.0f, 0.0f);
 				animation.setDuration(1000);
@@ -371,6 +374,12 @@ public class MemoryGame extends Activity implements OnClickListener {
 
 		// Initiate a generic request to load it with an ad
 		adView.loadAd(new AdRequest());
+	}
+
+	@Override
+	protected void onDestroy() {
+		sparkSound.release();
+		super.onDestroy();
 	}
 
 }
