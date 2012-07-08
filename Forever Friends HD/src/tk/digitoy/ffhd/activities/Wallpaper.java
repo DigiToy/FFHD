@@ -65,9 +65,7 @@ public class Wallpaper extends Activity implements Runnable {
 		wallNumber = getIntent().getIntExtra("wallNumber", 1000);
 		resID = walls[wallNumber];
 
-		if (AppSettings.dispHeight == 480) {
-			wSize = "960x800";
-		} else if (AppSettings.dispHeight == 600) {
+		if (AppSettings.dispHeight == 600) {
 			wSize = "1200x1024";
 		} else if (AppSettings.dispHeight == 720) {
 			wSize = "1440x1280";
