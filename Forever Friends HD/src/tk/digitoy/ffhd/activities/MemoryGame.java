@@ -182,6 +182,8 @@ public class MemoryGame extends Activity implements OnClickListener {
 		} else if (q == 2 && sec == false) {
 
 			if (image[k].vis == true) {
+				MediaPlayer.create(getBaseContext(), R.raw.sparks_music)
+						.start();
 				myHandler.removeCallbacks(image[k]);
 				animation = new AlphaAnimation(1.0f, 0.0f);
 				animation.setDuration(1000);
@@ -353,7 +355,7 @@ public class MemoryGame extends Activity implements OnClickListener {
 	private AdView adView;
 
 	public void AdMobAdsRequest() {
-		
+
 		adView = new AdView(this, AdSize.BANNER, AppSettings.MY_AD_UNIT_ID);
 
 		// Lookup your LinearLayout assuming it’s been given

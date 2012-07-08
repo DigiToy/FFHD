@@ -8,5 +8,5 @@
     <string name="wallpaper_thumb">Wallpaper Thumbnail</string>
     <string name="wallpaper_saved">Wallpaper Saved</string>
     <string name="wallpaper_changed">Wallpaper Changed</string>
-    <string name="wallpaper_alreadysaved">Wallpaper already has been saved</string>
+    <string name="puzzle_restart">Restart game</string>
 </resources>
