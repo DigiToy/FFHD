@@ -102,8 +102,11 @@ public class MemoryGame extends Activity implements OnClickListener {
 
 		AdMobAdsRequest();
 
-		sparkSound = MediaPlayer.create(getBaseContext(), R.raw.sparks_music);
+		initSparkSound();
+	}
 
+	private void initSparkSound() {
+		sparkSound = MediaPlayer.create(getBaseContext(), R.raw.sparks_music);
 	}
 
 	@Override
@@ -186,6 +189,10 @@ public class MemoryGame extends Activity implements OnClickListener {
 		} else if (q == 2 && sec == false) {
 
 			if (image[k].vis == true) {
+				if (sparkSound.isPlaying()) {
+					sparkSound.reset();
+					initSparkSound();
+				}
 				sparkSound.start();
 				myHandler.removeCallbacks(image[k]);
 				animation = new AlphaAnimation(1.0f, 0.0f);
