@@ -143,7 +143,7 @@ public class PuzzleGame extends Activity {
 			// imgSoundOff = new ImageRect(context, R.drawable.sound_icon_off,
 			// point);
 			point.set(width / 15, 2 * height / 3);
-			imgShow = new ImageRect(context, R.drawable.show, point);
+			imgShow = new ImageRect(context, R.drawable.show_inactive, point);
 
 			ImagesRealization imagesRealization = new ImagesRealization(
 					context, random, point2, point1, width, height);
