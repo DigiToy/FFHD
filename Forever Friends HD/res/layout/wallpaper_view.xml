@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/button_sound_content"
-        android:src="@drawable/save_button" />
+        android:src="@drawable/set_button" />
 
     <ImageView
         android:id="@+id/buttonSetWall"
