@@ -6,11 +6,6 @@ import java.util.Random;
 import tk.digitoy.ffhd.utils.AppSettings;
 import tk.digitoy.ffhd.utils.ImageRect;
 import tk.digitoy.ffhd.utils.ImagesRealization;
-
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -26,10 +21,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class PuzzleGame extends Activity {
 	Dialog alertDialog;
@@ -37,7 +36,7 @@ public class PuzzleGame extends Activity {
 	DrawView main;
 	RelativeLayout layout;
 	private ImageView buttonSound;
-	private ImageView buttonRestart;
+	private ImageButton buttonRestart;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,11 +82,11 @@ public class PuzzleGame extends Activity {
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
+	protected void onPause() {		
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
+		super.onPause();
 	}
 
 	class DrawView extends View {
@@ -143,7 +142,7 @@ public class PuzzleGame extends Activity {
 			// imgSoundOff = new ImageRect(context, R.drawable.sound_icon_off,
 			// point);
 			point.set(width / 15, 2 * height / 3);
-			imgShow = new ImageRect(context, R.drawable.show_inactive, point);
+			imgShow = new ImageRect(context, R.drawable.show_button_normal, point);
 
 			ImagesRealization imagesRealization = new ImagesRealization(
 					context, random, point2, point1, width, height);
@@ -581,7 +580,8 @@ public class PuzzleGame extends Activity {
 		alertDialog.setContentView(R.layout.dialog);
 		alertDialog.setCancelable(true);
 
-		Button okButton = (Button) alertDialog.findViewById(R.id.OK_btn);
+		ImageButton okButton = (ImageButton) alertDialog
+				.findViewById(R.id.OK_btn);
 		okButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -611,7 +611,7 @@ public class PuzzleGame extends Activity {
 		} else {
 			buttonSound.setImageResource(R.drawable.sound_icon_on);
 		}
-		buttonRestart = (ImageView) findViewById(R.id.buttonRestart);
+		buttonRestart = (ImageButton) findViewById(R.id.buttonRestart);
 
 		layout.removeView(buttonSound);
 		layout.removeView(buttonRestart);

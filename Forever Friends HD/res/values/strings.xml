@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
-    <string name="app_name">Forever Friends HD</string>
+    <string name="app_name">Forever Friends</string>
     <string name="button_sound_content">Sound On/Off</string>
     <string name="win_text">Congratulations, you win</string>
     <string name="please_wait">Please Wait</string>
@@ -9,4 +8,5 @@
     <string name="wallpaper_saved">Wallpaper Saved</string>
     <string name="wallpaper_changed">Wallpaper Changed</string>
     <string name="puzzle_restart">Restart game</string>
-</resources>
+    <string name="wallpapers">Wallpapers</string>
+</resources>

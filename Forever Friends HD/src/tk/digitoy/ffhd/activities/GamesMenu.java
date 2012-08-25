@@ -1,7 +1,6 @@
 package tk.digitoy.ffhd.activities;
 
 import tk.digitoy.ffhd.utils.AppSettings;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -9,8 +8,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -18,8 +17,8 @@ public class GamesMenu extends Activity {
 
 	// Button Images
 	private ImageView buttonSound;
-	private ImageView buttonPuzzle;
-	private ImageView buttonMemory;
+	private ImageButton buttonPuzzle;
+	private ImageButton buttonMemory;
 
 	// Layout Parameters
 	// Buttons selected
@@ -133,14 +132,12 @@ public class GamesMenu extends Activity {
 		rl = (RelativeLayout) findViewById(R.id.games_menu);
 
 		// "Memory Game" button
-		buttonMemory = new ImageView(this);
-		buttonMemory.setImageResource(R.drawable.button_memory);
-		buttonMemory.setScaleType(ScaleType.FIT_XY);
+		buttonMemory = new ImageButton(this);
+		buttonMemory.setBackgroundResource(R.drawable.button_memory);
 
 		// "Puzzle Game" button
-		buttonPuzzle = new ImageView(this);
-		buttonPuzzle.setImageResource(R.drawable.button_puzzle);
-		buttonPuzzle.setScaleType(ScaleType.FIT_XY);
+		buttonPuzzle = new ImageButton(this);
+		buttonPuzzle.setBackgroundResource(R.drawable.button_puzzle);
 
 		// Adding views to layout
 		rl.addView(buttonMemory);
@@ -165,9 +162,9 @@ public class GamesMenu extends Activity {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
+		super.onPause();
 	}
 }

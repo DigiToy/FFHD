@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -17,7 +17,7 @@ public class MemoryHelp extends Activity {
 
 	// Button Images
 	private ImageView buttonSound;
-	private ImageView buttonPlay;
+	private ImageButton buttonPlay;
 
 	// Layout Parameters
 	private LayoutParams paramPlay;
@@ -119,9 +119,8 @@ public class MemoryHelp extends Activity {
 		rl = (RelativeLayout) findViewById(R.id.memory_help_rl);
 
 		// "Play" button
-		buttonPlay = new ImageView(this);
-		buttonPlay.setImageResource(R.drawable.play_memory);
-		buttonPlay.setScaleType(ScaleType.FIT_CENTER);
+		buttonPlay = new ImageButton(this);
+		buttonPlay.setBackgroundResource(R.drawable.play_memory);
 
 		// Adding views to layout
 		rl.addView(buttonPlay);
@@ -136,9 +135,9 @@ public class MemoryHelp extends Activity {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
+		super.onPause();
 	}
 }

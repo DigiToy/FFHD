@@ -15,11 +15,12 @@
         android:contentDescription="@string/win_text"
         android:src="@drawable/you_won" />
 
-    <Button
+    <ImageButton
         android:id="@+id/OK_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@drawable/ok_button" />
+        android:background="@drawable/ok_button"
+        android:contentDescription="@string/win_text" />
 
 </LinearLayout>

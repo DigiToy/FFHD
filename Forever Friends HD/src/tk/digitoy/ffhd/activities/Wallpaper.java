@@ -22,6 +22,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ public class Wallpaper extends Activity implements Runnable {
 
 	private ProgressDialog pDialog;
 	// Button Images
-	private ImageView buttonSet;
-	private ImageView buttonSave;
+	private ImageButton buttonSet;
+	private ImageButton buttonSave;
 
 	// generate bitmap
 	private int resID;
@@ -65,7 +66,9 @@ public class Wallpaper extends Activity implements Runnable {
 		wallNumber = getIntent().getIntExtra("wallNumber", 1000);
 		resID = walls[wallNumber];
 
-		if (AppSettings.dispHeight == 600) {
+		if (AppSettings.dispHeight == 480) {
+			wSize = "960x800";
+		} else if (AppSettings.dispHeight == 600) {
 			wSize = "1200x1024";
 		} else if (AppSettings.dispHeight == 720) {
 			wSize = "1440x1280";
@@ -120,8 +123,8 @@ public class Wallpaper extends Activity implements Runnable {
 	private void drawStaticLayout() {
 
 		// Handling from XML
-		buttonSet = (ImageView) findViewById(R.id.buttonSetWall);
-		buttonSave = (ImageView) findViewById(R.id.buttonSaveWall);
+		buttonSet = (ImageButton) findViewById(R.id.buttonSetWall);
+		buttonSave = (ImageButton) findViewById(R.id.buttonSaveWall);
 
 		ImageView img = (ImageView) findViewById(R.id.wallPaper);
 		img.setImageResource(resID);
@@ -136,13 +139,13 @@ public class Wallpaper extends Activity implements Runnable {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
 		if (pDialog != null && pDialog.isShowing()) {
 			pDialog.dismiss();
 		}
+		super.onPause();
 	}
 
 	public void setWallpaper() {
@@ -168,7 +171,7 @@ public class Wallpaper extends Activity implements Runnable {
 	public void run() {
 		if (saveOrSet == 1) {
 			String newFileName = Environment.getExternalStorageDirectory()
-					+ "/Forever_Friends/FF_wallpaper_" + (wallNumber + 1)
+					+ "/Forever Friends/FF_wallpaper_" + (wallNumber + 1)
 					+ ".jpg";
 
 			AssetManager assetManager = this.getAssets();
@@ -177,7 +180,7 @@ public class Wallpaper extends Activity implements Runnable {
 			OutputStream out = null;
 			try {
 				new File(Environment.getExternalStorageDirectory()
-						+ "/Forever_Friends/").mkdirs();
+						+ "/Forever Friends/").mkdirs();
 
 				in = assetManager.open(imagePath);
 

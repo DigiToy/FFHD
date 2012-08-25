@@ -30,8 +30,7 @@ public class About extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		AppSettings.dispHeight = metrics.heightPixels;
 		AppSettings.dispWidth = metrics.widthPixels;
-		AppSettings.music = MediaPlayer.create(getBaseContext(),
-				R.raw.music);
+		AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
 		AppSettings.music.setLooping(true);
 		AppSettings.isInit = true;
 	}
@@ -79,16 +78,17 @@ public class About extends Activity {
 
 	// Start playing sound if sound is on
 	private void sing() {
-		if (AppSettings.soundIsOn) {
+		if (AppSettings.soundIsOn
+				&& !AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.start();
 		}
 	}
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
+		super.onPause();
 	}
 }

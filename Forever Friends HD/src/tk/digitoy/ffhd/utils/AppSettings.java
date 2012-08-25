@@ -7,6 +7,7 @@ import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.PowerManager;
 
 public class AppSettings {
 	public static boolean isInit = false;
@@ -20,9 +21,9 @@ public class AppSettings {
 
 	// Kitty song
 	public static MediaPlayer music;
-	
-	//AdMob ID
-	public static String MY_AD_UNIT_ID = "a14ff8400c1ddb6";
+
+	// AdMob ID
+	public static String MY_AD_UNIT_ID = "a1502e3df386d4c";
 
 	/**
 	 * Checks if the application is being sent in the background (i.e behind
@@ -36,6 +37,11 @@ public class AppSettings {
 		ActivityManager am = (ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE);
 		List<RunningTaskInfo> tasks = am.getRunningTasks(1);
+		PowerManager pm = (PowerManager) context
+				.getSystemService(Context.POWER_SERVICE);
+		if (!pm.isScreenOn()) {
+			return true;
+		}
 		if (!tasks.isEmpty()) {
 			ComponentName topActivity = tasks.get(0).topActivity;
 			if (!topActivity.getPackageName().equals(context.getPackageName())) {

@@ -1,16 +1,16 @@
 package tk.digitoy.ffhd.activities;
 
 import tk.digitoy.ffhd.utils.AppSettings;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -18,15 +18,17 @@ public class MainMenu extends Activity {
 
 	// Button Images
 	private ImageView buttonSound;
-	private ImageView buttonGame;
-	private ImageView buttonWall;
-	private ImageView buttonAbout;
+	private ImageButton buttonGame;
+	private ImageButton buttonWall;
+	private ImageButton buttonAbout;
+	private ImageButton buttonMoreGames;
 
 	// Layout Parameters
 	// Buttons selected
 	private LayoutParams paramGame;
 	private LayoutParams paramWall;
 	private LayoutParams paramAbout;
+	private LayoutParams paramMoreGames;
 
 	// Activity Layout
 	private RelativeLayout rl;
@@ -36,9 +38,9 @@ public class MainMenu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_menu);
-
-		initAll();
-
+		if (!AppSettings.isInit) {
+			initAll();
+		}
 		initLayoutParams();
 		drawStaticLayout();
 	}
@@ -71,6 +73,7 @@ public class MainMenu extends Activity {
 		buttonGame.setLayoutParams(paramGame);
 		buttonWall.setLayoutParams(paramWall);
 		buttonAbout.setLayoutParams(paramAbout);
+		buttonMoreGames.setLayoutParams(paramMoreGames);
 	}
 
 	// Activating click listeners
@@ -111,6 +114,15 @@ public class MainMenu extends Activity {
 			}
 		});
 
+		// "More Games" button Click Listener
+		buttonMoreGames.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("market://search?q=pub:DigiToy"));
+				startActivity(intent);
+			}
+		});
+
 	}
 
 	// Initializing Layout Parameters
@@ -130,6 +142,11 @@ public class MainMenu extends Activity {
 				AppSettings.dispHeight * 76 / 480);
 		paramAbout.leftMargin = AppSettings.dispWidth * 86 / 800;
 		paramAbout.topMargin = AppSettings.dispHeight * 207 / 480;
+
+		paramMoreGames = new LayoutParams(AppSettings.dispWidth * 121 / 800,
+				AppSettings.dispHeight * 69 / 480);
+		paramMoreGames.leftMargin = AppSettings.dispWidth * 659 / 800;
+		paramMoreGames.topMargin = AppSettings.dispHeight * 391 / 480;
 	}
 
 	// Creating and adding static views
@@ -138,25 +155,27 @@ public class MainMenu extends Activity {
 		// Getting activite's RelativeLAyout
 		rl = (RelativeLayout) findViewById(R.id.main_menu);
 
-		// "Game" button
-		buttonGame = new ImageView(this);
-		buttonGame.setImageResource(R.drawable.button_games);
-		buttonGame.setScaleType(ScaleType.FIT_XY);
-
 		// "Wallpapers" button
-		buttonWall = new ImageView(this);
-		buttonWall.setImageResource(R.drawable.button_wallpapers);
-		buttonWall.setScaleType(ScaleType.FIT_XY);
+		buttonWall = new ImageButton(this);
+		buttonWall.setBackgroundResource(R.drawable.button_wallpapers);
+
+		// "Game" button
+		buttonGame = new ImageButton(this);
+		buttonGame.setBackgroundResource(R.drawable.button_games);
 
 		// "About Hello Kitty" button
-		buttonAbout = new ImageView(this);
-		buttonAbout.setImageResource(R.drawable.button_about);
-		buttonAbout.setScaleType(ScaleType.FIT_XY);
+		buttonAbout = new ImageButton(this);
+		buttonAbout.setBackgroundResource(R.drawable.button_about);
+
+		// "More Games" button
+		buttonMoreGames = new ImageButton(this);
+		buttonMoreGames.setBackgroundResource(R.drawable.more_button);
 
 		// Adding views to layout
 		rl.addView(buttonGame);
 		rl.addView(buttonWall);
 		rl.addView(buttonAbout);
+		rl.addView(buttonMoreGames);
 	}
 
 	// Creating and adding dynamic views
@@ -179,17 +198,16 @@ public class MainMenu extends Activity {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
 		if (AppSettings.isApplicationSentToBackground(this)) {
 			AppSettings.music.pause();
 		}
+		super.onPause();
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onBackPressed() {
 		AppSettings.music.release();
-		AppSettings.isInit = false;
-		super.onDestroy();
+		super.onBackPressed();
 	}
 
 }
