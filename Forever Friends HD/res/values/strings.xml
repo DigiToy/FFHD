@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Forever Friends</string>
+    <string name="app_name">Forever Friends HD</string>
     <string name="button_sound_content">Sound On/Off</string>
     <string name="win_text">Congratulations, you win</string>
     <string name="please_wait">Please Wait</string>
