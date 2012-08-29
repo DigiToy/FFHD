@@ -191,7 +191,10 @@ public class MainMenu extends Activity {
 
 	// Start playing sound if sound is on
 	private void sing() {
-		if (AppSettings.soundIsOn) {
+		if (AppSettings.music == null) {
+			AppSettings.music = MediaPlayer.create(getBaseContext(), R.raw.music);
+		}
+		if (AppSettings.soundIsOn && !AppSettings.music.isPlaying()) {
 			AppSettings.music.start();
 		}
 	}
@@ -206,7 +209,10 @@ public class MainMenu extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		AppSettings.music.release();
+		if (AppSettings.music != null) {
+			AppSettings.music.release();
+			AppSettings.music = null;
+		}
 		super.onBackPressed();
 	}
 
